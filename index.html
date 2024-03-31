@@ -67,15 +67,12 @@
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
-  <!-- 確認用(a-assets内のvidのidを変更必須) -->
-  <!-- <video src="./img/2-6.mp4" preload="auto" id="vid" response-type="arraybuffer" crossorigin="anonymous" loop
-    crossorigin webkit-playsinline muted playsinline style="position: absolute; z-index: 1000000; top: 50%; left: 50%;">
-  </video> -->
+
   <a-scene vr-mode-ui="enabled: false;" renderer='antialias: true; alpha: true; precision: medium;' embedded
     arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
     <a-assets>
-      <video src="./img/2-6.mp4" preload="auto" id="vid" response-type="arraybuffer" crossorigin="anonymous" loop
+      <video src="./movie/movie01.mp4" preload="auto" id="vid" response-type="arraybuffer" crossorigin="anonymous" loop
         crossorigin webkit-playsinline muted playsinline>
       </video>
     </a-assets>
@@ -84,7 +81,7 @@
     <a-nft videohandler type="nft" url="https://raw.githack.com/itaushiro/2403_ar_js_video/main/trex/trex" smooth="true"
       smoothCount="10" smoothTolerance="0.01" smoothThreshold="5" size="4">
 
-      <a-video id="a-video" src="#vid" position='120 0 -240' rotation='270 180 180' width='320' height='176'></a-video>
+      <a-video id="a-video" src="#vid" position='120 0 -240' rotation='90 180 0' width='320' height='176'></a-video>
 
     </a-nft>
 
@@ -93,20 +90,22 @@
   </a-scene>
 </body>
 <script>
-  AFRAME.registerComponent('videohandler', {
-    init: function () {
-      var marker = this.el;
+  window.onload = function () {
+    AFRAME.registerComponent('videohandler', {
+      init: function () {
+        var marker = this.el;
 
-      marker.addEventListener('markerFound', function () {
-        document.getElementById('vid').play();
-      }.bind(this));
+        marker.addEventListener('markerFound', function () {
+          document.getElementById('vid').play();
+        }.bind(this));
 
-      marker.addEventListener('markerLost', function () {
-        document.getElementById('vid').pause();
-        // document.getElementById('vid').currentTime = 0;
-      }.bind(this));
-    }
-  });
+        marker.addEventListener('markerLost', function () {
+          document.getElementById('vid').pause();
+          // document.getElementById('vid').currentTime = 0;
+        }.bind(this));
+      }
+    });
+  };
 </script>
 
 </html>
